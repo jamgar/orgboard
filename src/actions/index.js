@@ -5,6 +5,8 @@ import {
   AUTH_USER,
   AUTH_ERROR,
   UNAUTH_USER,
+  FETCH_BOARDS,
+  CREATE_BOARD,
   FETCH_TODOS
 } from '../constants'
 
@@ -51,10 +53,51 @@ export function authError(error) {
   }
 }
 
+export const fetchBoards = () => {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/boards`, {
+      headers: {
+        Authorization: localStorage.getItem('auth_token'),
+        Accept: 'application/vnd.todos.v1+json'
+      }
+    })
+      .then(response => {
+        console.log('FETCH BOARDS', response.data)
+        dispatch({
+          type: FETCH_BOARDS,
+          payload: response.data
+        })
+      })
+  }
+}
+
+export const createBoard = (board) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/boards`, board, {
+      headers: {
+        Authorization: localStorage.getItem('auth_token'),
+        Accept: 'application/vnd.todos.v1+json'
+      }
+    })
+      .then(response => {
+        dispatch({
+          type: CREATE_BOARD,
+          payload: response
+        })
+      })
+      .catch(response => {
+        console.log('Error', response)
+      })
+  }
+}
+
 export function fetchTodos() {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/todos`, {
-      headers: { authorization: localStorage.getItem('auth_token')}
+      headers: {
+        authorization: localStorage.getItem('auth_token'),
+        Accept: 'application/vnd.todos.v1+json'
+      }
     })
       .then(response => {
         dispatch({
@@ -65,12 +108,4 @@ export function fetchTodos() {
   }
 }
 
-//export const createBoard = () => {
-//  // Use axios to post to backend
-//  const action = {
-//    type: CREATE_BOARD,
-//    payload: board
-//  }
-//  return action
-//}
 

@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { fetchTodos } from '../actions'
+import { fetchBoards } from '../actions'
+import BoardNew from '../containers/board_new'
 
 class Boards extends Component {
-  componentWillMount() {
-    this.props.fetchTodos()
+  componentDidMount() {
+    this.props.fetchBoards()
   }
 
-  renderTodos() {
-    return _.map(this.props.todos, (todo) => {
+  renderBoards() {
+    return _.map(this.props.boards, (board) => {
       return (
-        <div key={todo.id}>{todo.title}</div>
+        <div key={board.id}>{board.title}</div>
       )
     })
   }
@@ -20,13 +21,15 @@ class Boards extends Component {
   render() {
     return (
       <div>
-        {this.renderTodos()}</div>
+        <BoardNew />
+        {this.renderBoards()}
+      </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return { todos: state.todos }
+  return { boards: state.boards }
 }
 
-export default connect(mapStateToProps, { fetchTodos })(Boards)
+export default connect(mapStateToProps, { fetchBoards })(Boards)

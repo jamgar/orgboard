@@ -1,24 +1,13 @@
-import { CREATE_BOARD } from '../constants'
+import { FETCH_BOARDS, CREATE_BOARD } from '../constants'
+import _ from 'lodash'
 
-const board = (action) => {
-  // Used to simulate the backend
-  let { title } = action
-  return {
-    id: Math.random(),
-    title
-  }
-}
-
-const boards = (state = [], action) => {
-  let boards = null
+export default function(state = {}, action) {
   switch(action.type) {
+    case FETCH_BOARDS:
+      return _.mapKeys(action.payload, 'id')
     case CREATE_BOARD:
-      // use axios to post to backend
-      boards = [...state, board(action)]
-      return boards
-    default:
-      return state
+      return { ...state, [action.payload.data.id]: action.payload.data }
   }
-}
 
-export default boards
+  return state
+}
