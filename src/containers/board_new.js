@@ -18,9 +18,10 @@ class BoardNew extends Component {
 
     return (
       <div>
-        <label>{field.title}</label>
         <input
+          className="form-control"
           type={field.type}
+          placeholder={field.placeholder}
           {...field.input}
         />
       </div>
@@ -35,16 +36,23 @@ class BoardNew extends Component {
     const { handleSubmit } = this.props
 
     return (
-      <div>
-        <form onSubmit={handleSubmit(this.handleOnSubmit)}>
-          <Field
-            label="Title"
-            name="title"
-            type="text"
-            component={this.renderField}
-          />
-          <button type="submit" className="btn btn-primary">Add Board</button>
-        </form>
+      <div className="container">
+        <div className="row">
+          <div id="board-from" className="col-sm-4 panel panel-info">
+            <form className="form-inline" onSubmit={handleSubmit(this.handleOnSubmit)}>
+              <div className="form-group">
+                <Field
+                  label="Title"
+                  name="title"
+                  type="text"
+                  placeholder="Enter Title"
+                  component={this.renderField}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">Add Board</button>
+            </form>
+          </div>
+        </div>
       </div>
     )
   }

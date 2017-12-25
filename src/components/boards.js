@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 import { fetchBoards } from '../actions'
 import BoardNew from '../containers/board_new'
+import Board from './board'
 
 class Boards extends Component {
   componentDidMount() {
@@ -13,7 +14,9 @@ class Boards extends Component {
   renderBoards() {
     return _.map(this.props.boards, (board) => {
       return (
-        <div key={board.id}>{board.title}</div>
+        <div key={board.id}>
+          <Board board={board} />
+        </div>
       )
     })
   }
@@ -22,7 +25,11 @@ class Boards extends Component {
     return (
       <div>
         <BoardNew />
-        {this.renderBoards()}
+        <div className="container">
+          <div className="row">
+            {this.renderBoards()}
+          </div>
+        </div>
       </div>
     )
   }

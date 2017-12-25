@@ -7,6 +7,7 @@ import {
   UNAUTH_USER,
   FETCH_BOARDS,
   CREATE_BOARD,
+  CREATE_CARD,
   FETCH_TODOS
 } from '../constants'
 
@@ -91,6 +92,26 @@ export const createBoard = (board) => {
   }
 }
 
+export const createCard = (board_id, card) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/boards/${board_id}/cards`, card , {
+      headers: {
+        Authorization: localStorage.getItem('auth_token'),
+        Accept: 'application/vnd.todos.v1+json'
+      }
+    })
+      .then(response => {
+        dispatch({
+          type: CREATE_CARD,
+          payload: response
+        })
+      })
+      .catch(response => {
+        console.log('Error', response)
+      })
+  }
+}
+
 export function fetchTodos() {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/todos`, {
@@ -100,6 +121,7 @@ export function fetchTodos() {
       }
     })
       .then(response => {
+        console.log(response.data)
         dispatch({
           type: FETCH_TODOS,
           payload: response.data
