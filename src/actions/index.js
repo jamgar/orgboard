@@ -12,6 +12,7 @@ import {
 } from '../constants'
 
 const ROOT_URL = 'https://determined-keller-0474d9.netlify.com'
+// const ROOT_URL = 'http://localhost:3000'
 
 export function signinUser({ email, password }) {
  return (dispatch) => {
