@@ -4,14 +4,12 @@ import { reducer as form } from 'redux-form'
 import authReducer from './auth_reducer'
 import todosReducer from './todos_reducer'
 import boardReducer from './board_reducer'
-import cardReducer from './card_reducer'
 
 const rootReducer = combineReducers({
   form,
   auth: authReducer,
   todos: todosReducer,
   boards: boardReducer,
-  cards: cardReducer
 })
 
 export default rootReducer

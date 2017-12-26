@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import { signinUser } from '../../actions'
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ input, label, type, autofocus, meta: { touched, error } }) => (
   <div className="form-group">
     <label>{label}</label>
     <input
@@ -12,6 +12,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
       {...input}
       placeholder={label}
       type={type}
+      autofocus={autofocus}
     />
   </div>
 )
@@ -36,22 +37,29 @@ class Signin extends Component {
     const { handleSubmit } = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-        <Field
-          name="email"
-          type="text"
-          component={renderField}
-          label="Email"
-        />
-        <Field
-          name="password"
-          type="password"
-          component={renderField}
-          label="Password"
-        />
-        {this.renderAlert()}
-        <button action="submit" className="btn btn-primary">Sign in</button>
-      </form>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+              <Field
+                name="email"
+                type="text"
+                component={renderField}
+                label="Email"
+                autofocus="true"
+              />
+              <Field
+                name="password"
+                type="password"
+                component={renderField}
+                label="Password"
+              />
+              {this.renderAlert()}
+              <button action="submit" className="btn btn-primary">Sign in</button>
+            </form>
+          </div>
+        </div>
+      </div>
     )
   }
 }

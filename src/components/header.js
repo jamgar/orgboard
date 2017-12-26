@@ -5,9 +5,14 @@ import { Link } from 'react-router-dom'
 class Header extends Component {
   renderLinks = () => {
     if (this.props.authenticated) {
-      return <li className="nav-item">
-        <Link className="nav-link" to="/signout">Sign out</Link>
+      return [
+        <li className="nav-item" key={3}>
+          <Link className="nav-link" to="/boards">My Boards</Link>
+        </li>,
+        <li className="nav-item" key={4}>
+          <Link className="nav-link" to="/signout">Sign out</Link>
         </li>
+      ]
     } else {
       return [
         <li className="nav-item" key={1}>

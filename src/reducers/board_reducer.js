@@ -1,4 +1,4 @@
-import { FETCH_BOARDS, CREATE_BOARD } from '../constants'
+import { FETCH_BOARDS, CREATE_BOARD, UPDATE_BOARD } from '../constants'
 import _ from 'lodash'
 
 export default function(state = {}, action) {
@@ -6,6 +6,8 @@ export default function(state = {}, action) {
     case FETCH_BOARDS:
       return _.mapKeys(action.payload, 'id')
     case CREATE_BOARD:
+      return { ...state, [action.payload.data.id]: action.payload.data }
+    case UPDATE_BOARD:
       return { ...state, [action.payload.data.id]: action.payload.data }
   }
 

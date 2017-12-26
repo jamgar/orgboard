@@ -1,8 +1,10 @@
 import React from 'react'
 
 const Home = () => (
-  <div>
-    <h1>Welcome to OrgBoard</h1>
+  <div className="jumbotron">
+    <div className="container text-center">
+      <h1>Welcome to OrgBoard</h1>
+    </div>
   </div>
 )
 

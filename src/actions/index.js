@@ -7,7 +7,7 @@ import {
   UNAUTH_USER,
   FETCH_BOARDS,
   CREATE_BOARD,
-  CREATE_CARD,
+  UPDATE_BOARD,
   FETCH_TODOS
 } from '../constants'
 
@@ -102,7 +102,7 @@ export const createCard = (board_id, card) => {
     })
       .then(response => {
         dispatch({
-          type: CREATE_CARD,
+          type: UPDATE_BOARD,
           payload: response
         })
       })

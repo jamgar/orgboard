@@ -4,6 +4,15 @@ body {
   font-family: sans-serif;
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
 #board-from {
   padding: 15px;
+}
+
+.jumbotron {
+  background: url('./images/orgboard-main.jpg') no-repeat;
+  background-size: cover;
 }
