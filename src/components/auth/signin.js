@@ -38,6 +38,9 @@ class Signin extends Component {
 
     return (
       <div class="container">
+        <div class="page-header">
+          <h2>Sign In</h2>
+        </div>
         <div class="row">
           <div class="col-md-4">
             <form onSubmit={handleSubmit(this.handleFormSubmit)}>
