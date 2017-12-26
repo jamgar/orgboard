@@ -38,7 +38,7 @@ class BoardNew extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div id="board-from" className="col-sm-4 panel panel-info">
+          <div id="board-form" className="col-sm-4 panel panel-info">
             <form className="form-inline" onSubmit={handleSubmit(this.handleOnSubmit)}>
               <div className="form-group">
                 <Field

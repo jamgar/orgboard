@@ -2,17 +2,20 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: lightblue;
 }
 
 .navbar {
   margin-bottom: 0;
 }
 
-#board-from {
+#board-form {
+  margin-top: 20px;
   padding: 15px;
 }
 
 .jumbotron {
+  height: 70vh;
   background: url('./images/orgboard-main.jpg') no-repeat;
   background-size: cover;
 }
