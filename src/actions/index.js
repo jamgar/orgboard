@@ -11,8 +11,8 @@ import {
   FETCH_TODOS
 } from '../constants'
 
-// const ROOT_URL = 'https://mighty-caverns-28642.herokuapp.com'
-const ROOT_URL = 'http://localhost:3000/'
+const ROOT_URL = 'https://mighty-caverns-28642.herokuapp.com'
+// const ROOT_URL = 'http://localhost:3000/'
 
 export const signinUser = ({ email, password }) => {
  return (dispatch) => {
