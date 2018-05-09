@@ -33,7 +33,7 @@ class Header extends Component {
             <Link className="nav-link" to="/about">About</Link>
           </li>
           <li className="nav-item">
-            <Link class="nav-link" to="/contact">Contact</Link>
+            <Link className="nav-link" to="/contact">Contact</Link>
           </li>
           {this.renderLinks()}
         </ul>

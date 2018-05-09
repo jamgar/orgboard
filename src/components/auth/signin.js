@@ -12,7 +12,7 @@ const renderField = ({ input, label, type, autofocus, meta: { touched, error } }
       {...input}
       placeholder={label}
       type={type}
-      autofocus={autofocus}
+      autoFocus={autofocus}
     />
   </div>
 )
@@ -37,19 +37,19 @@ class Signin extends Component {
     const { handleSubmit } = this.props
 
     return (
-      <div class="container">
-        <div class="page-header">
+      <div className="container">
+        <div className="page-header">
           <h2>Sign In</h2>
         </div>
-        <div class="row">
-          <div class="col-md-4">
+        <div className="row">
+          <div className="col-md-4">
             <form onSubmit={handleSubmit(this.handleFormSubmit)}>
               <Field
                 name="email"
                 type="text"
                 component={renderField}
                 label="Email"
-                autofocus="true"
+                autoFocus="true"
               />
               <Field
                 name="password"

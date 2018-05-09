@@ -36,12 +36,12 @@ class Signup extends Component {
     const { handleSubmit } = this.props
 
     return (
-      <div class="container">
-        <div class="page-header">
+      <div className="container">
+        <div className="page-header">
           <h2>Sign Up</h2>
         </div>
-        <div class="row">
-          <div class="col-md-4">
+        <div className="row">
+          <div className="col-md-4">
             <form onSubmit={handleSubmit(this.handleFormSubmit)}>
               <Field
                 name="email"

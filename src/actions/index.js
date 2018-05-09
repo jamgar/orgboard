@@ -11,10 +11,10 @@ import {
   FETCH_TODOS
 } from '../constants'
 
-const ROOT_URL = 'https://mighty-caverns-28642.herokuapp.com'
-// const ROOT_URL = 'http://localhost:3000'
+// const ROOT_URL = 'https://mighty-caverns-28642.herokuapp.com'
+const ROOT_URL = 'http://localhost:3000/'
 
-export function signinUser({ email, password }) {
+export const signinUser = ({ email, password }) => {
  return (dispatch) => {
    axios.post(`${ROOT_URL}/auth/login`, { email, password })
      .then(response => {
@@ -28,7 +28,7 @@ export function signinUser({ email, password }) {
  }
 }
 
-export function signupUser({ email, password, password_confirmation }) {
+export const signupUser = ({ email, password, password_confirmation }) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, { name: email, email, password, password_confirmation })
       .then(response => {
@@ -42,13 +42,13 @@ export function signupUser({ email, password, password_confirmation }) {
   }
 }
 
-export function signoutUser() {
+export const signoutUser = () => {
   localStorage.removeItem('auth_token')
 
   return { type: UNAUTH_USER }
 }
 
-export function authError(error) {
+export const authError = (error) => {
   return {
     type: AUTH_ERROR,
     payload: error
@@ -113,7 +113,7 @@ export const createCard = (board_id, card) => {
   }
 }
 
-export function fetchTodos() {
+export const fetchTodos = () => {
   return function(dispatch) {
     axios.get(`${ROOT_URL}/todos`, {
       headers: {
@@ -130,5 +130,3 @@ export function fetchTodos() {
       })
   }
 }
-
-
