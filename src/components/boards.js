@@ -12,13 +12,12 @@ class Boards extends Component {
   }
 
   renderBoards() {
-    return _.map(this.props.boards, (board) => {
-      return (
-        <div key={board.id}>
-          <Board board={board} />
-        </div>
-      )
-    })
+    return _.map(this.props.boards, (board) => (
+      <Board
+        key={board.id}
+        board={board}
+      />
+    ))
   }
 
   render() {

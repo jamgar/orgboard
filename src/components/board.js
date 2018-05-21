@@ -3,12 +3,12 @@ import _ from 'lodash'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { createCard } from '../actions'
+import { createCard, removeCard, removeBoard } from '../actions'
 import Card from './card'
 
 class Board extends Component {
-  constructor(props) {
-    super(props)
+  handleDeleteCard = (card_id) => {
+    this.props.removeCard(this.props.board.id, card_id)
   }
 
   renderCards = () => {
@@ -16,7 +16,9 @@ class Board extends Component {
       return (
         <Card
           key={card.id}
+          board_id={this.props.board.id}
           card={card}
+          handleDeleteCard={this.handleDeleteCard}
         />
       )
     })
@@ -25,6 +27,11 @@ class Board extends Component {
   handleOnSubmit = (values) => {
     const card = { content: values[`cardContent_${this.props.board.id}`] }
     this.props.createCard(this.props.board.id, card)
+    this.props.reset()
+  }
+
+  handleOnDelete = () => {
+    this.props.removeBoard(this.props.board.id)
   }
 
   renderField = (field) => {
@@ -60,7 +67,10 @@ class Board extends Component {
     return (
       <div className="col col-sm-3">
         <div className="panel panel-default">
-          <div className="panel-heading">{board.title}</div>
+          <div className="panel-heading">
+            {board.title}
+            <button className="btn btn-link pull-right" onClick={this.handleOnDelete}>X</button>
+          </div>
           <div className="panel-body">
             {this.renderCardForm(board)}
             <ul className="list-group">
@@ -76,5 +86,5 @@ class Board extends Component {
 export default reduxForm({
   form: 'CardForm'
 })(
-  connect(null, { createCard })(Board)
+  connect(null, { createCard, removeCard, removeBoard })(Board)
 )

@@ -30,6 +30,7 @@ class BoardNew extends Component {
 
   handleOnSubmit = (values) => {
     this.props.createBoard(values)
+    this.props.reset()
   }
 
   render() {

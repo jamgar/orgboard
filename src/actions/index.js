@@ -8,11 +8,12 @@ import {
   FETCH_BOARDS,
   CREATE_BOARD,
   UPDATE_BOARD,
-  FETCH_TODOS
+  REMOVE_BOARD,
+  REMOVE_CARD
 } from '../constants'
 
 const ROOT_URL = 'https://mighty-caverns-28642.herokuapp.com'
-// const ROOT_URL = 'http://localhost:3000/'
+// const ROOT_URL = 'http://localhost:3000'
 
 export const signinUser = ({ email, password }) => {
  return (dispatch) => {
@@ -93,6 +94,26 @@ export const createBoard = (board) => {
   }
 }
 
+export const removeBoard = (id) => {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/boards/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem('auth_token'),
+        Accept: 'application/vnd.todos.v1+json'
+      }
+    })
+      .then(response => {
+        dispatch({
+          type: REMOVE_BOARD,
+          payload: id
+        })
+      })
+      .catch(response => {
+        console.log('Error', response)
+      })
+  }
+}
+
 export const createCard = (board_id, card) => {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/boards/${board_id}/cards`, card , {
@@ -113,20 +134,38 @@ export const createCard = (board_id, card) => {
   }
 }
 
-export const fetchTodos = () => {
-  return function(dispatch) {
-    axios.get(`${ROOT_URL}/todos`, {
+export const removeCard = (board_id, card_id) => {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/boards/${board_id}/cards/${card_id}`, {
       headers: {
         authorization: localStorage.getItem('auth_token'),
         Accept: 'application/vnd.todos.v1+json'
       }
     })
       .then(response => {
-        console.log(response.data)
         dispatch({
-          type: FETCH_TODOS,
-          payload: response.data
+          type: REMOVE_CARD,
+          board_id,
+          card_id
         })
       })
   }
 }
+
+// export const fetchTodos = () => {
+//   console.log('Fetching Todos...');
+//   return (dispatch) => {
+//     axios.get(`${ROOT_URL}/todos`, {
+//       headers: {
+//         authorization: localStorage.getItem('auth_token'),
+//         Accept: 'application/vnd.todos.v1+json'
+//       }
+//     })
+//       .then(response => {
+//         dispatch({
+//           type: FETCH_TODOS,
+//           payload: response.data
+//         })
+//       })
+//   }
+// }
