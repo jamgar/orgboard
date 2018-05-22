@@ -94,6 +94,26 @@ export const createBoard = (board) => {
   }
 }
 
+export const updateBoard = (board) => {
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/boards/${board.id}`, board, {
+      headers: {
+        Authorization: localStorage.getItem('auth_token'),
+        Accept: 'application/vnd.todos.v1+json'
+      }
+    })
+      .then(response => {
+        dispatch({
+          type: UPDATE_BOARD,
+          payload: response
+        })
+      })
+      .catch(response => {
+        console.log('Error', response)
+      })
+  }
+}
+
 export const removeBoard = (id) => {
   return (dispatch) => {
     axios.delete(`${ROOT_URL}/boards/${id}`, {

@@ -6,8 +6,14 @@ const Card = (props) => {
   }
   return (
     <li className="list-group-item">
-      {props.card.content}
-      <button className="btn btn-link pull-right" onClick={handleOnDelete}>X</button>
+      <div className="row">
+        <div className="col col-xs-10">
+          {props.card.content}
+        </div>
+        <div className="col col-xs-2">
+          <button className="btn btn-link pull-right" onClick={handleOnDelete}>X</button>
+        </div>
+      </div>
     </li>
   )
 }

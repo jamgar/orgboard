@@ -3,10 +3,17 @@ import _ from 'lodash'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { createCard, removeCard, removeBoard } from '../actions'
+import { createCard, removeCard, updateBoard, removeBoard } from '../actions'
 import Card from './card'
 
 class Board extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editing: null,
+      title: ''
+    }
+  }
   handleDeleteCard = (card_id) => {
     this.props.removeCard(this.props.board.id, card_id)
   }
@@ -30,8 +37,28 @@ class Board extends Component {
     this.props.reset()
   }
 
+  handleOnEditBoard = (e) => {
+    e.preventDefault()
+    const { board } = this.props
+    this.props.updateBoard({ ...board, title: this.state.title })
+    this.setState({ editing: null })
+  }
+
   handleOnDelete = () => {
     this.props.removeBoard(this.props.board.id)
+  }
+
+  handleSetEdit = () => {
+    this.setState({ editing: this.props.board.id })
+  }
+
+  handleOnBlur = () => {
+    this.setState({ editing: null })
+  }
+
+  onTitleChange = (e) => {
+    const title = e.target.value
+    this.setState(() => ({ title }))
   }
 
   renderField = (field) => {
@@ -68,8 +95,28 @@ class Board extends Component {
       <div className="col col-sm-3">
         <div className="panel panel-default">
           <div className="panel-heading">
-            {board.title}
-            <button className="btn btn-link pull-right" onClick={this.handleOnDelete}>X</button>
+            <div className="row">
+              <div className="col col-xs-10">
+                {
+                  this.state.editing === board.id ? (
+                    <form onSubmit={this.handleOnEditBoard}>
+                    <input
+                    type="text"
+                    defaultValue={board.title}
+                    onChange={this.onTitleChange}
+                    onBlur={this.handleOnBlur}
+                    autoFocus
+                    />
+                    </form>
+                  ) : (
+                    <p onClick={this.handleSetEdit}><strong>{board.title}</strong></p>
+                  )
+                }
+              </div>
+              <div className="col col-xs-2">
+                <button className="btn btn-link pull-right" onClick={this.handleOnDelete}>X</button>
+              </div>
+            </div>
           </div>
           <div className="panel-body">
             {this.renderCardForm(board)}
@@ -86,5 +133,5 @@ class Board extends Component {
 export default reduxForm({
   form: 'CardForm'
 })(
-  connect(null, { createCard, removeCard, removeBoard })(Board)
+  connect(null, { createCard, removeCard, updateBoard, removeBoard })(Board)
 )
